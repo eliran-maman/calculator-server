@@ -3,7 +3,7 @@ name: Docker - Build & Push calculator service image
 on:
   push:
     branches:
-      - 'main'
+      - master
   workflow_dispatch:
     branches:
       - '**'
