@@ -9,11 +9,13 @@ on:
       - '**'
 
 jobs:
-  install-sprkl-test:
+  run-tests-with-sprkl:
     runs-on: ubuntu-latest
     name: Installing Sprkl Testing
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with: 
           fetch-depth: 0
 
@@ -23,8 +25,16 @@ jobs:
           token: ${{ secrets.USE_SPRKL_CI_TOKEN }}
           setenv: false
 
-      - name: Setup NodeJS
-      - run: yarn install
-      - run: yarn test:e2e:sprkl
+      - name: Setup pnpm
+        run: npm install -g pnpm
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build Calculator-Service
+        run: pnpm build
+        
+      - name: Run tests
+        run: pnpm test
         env: 
           SPRKL_RECIPE: all

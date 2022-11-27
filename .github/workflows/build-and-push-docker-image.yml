@@ -3,13 +3,13 @@ name: Docker - Build & Push calculator service image
 on:
   push:
     branches:
-      - '**'
+      - 'main'
   workflow_dispatch:
     branches:
       - '**'
 
 jobs:
-  deploy:
+  dockerhub-build-and-push:
     runs-on: ubuntu-latest
     env:
       TERM: xterm
