@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node dist/index",
     "build": "rm -Rf dist && tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:sprkl": "sprkl -- jest"
+
   },
   "keywords": [],
   "author": "",
