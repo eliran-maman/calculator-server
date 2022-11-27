@@ -9,7 +9,7 @@ on:
       - '**'
 
 jobs:
-  deploy:
+  dockerhub-build-and-push:
     runs-on: ubuntu-latest
     env:
       TERM: xterm
