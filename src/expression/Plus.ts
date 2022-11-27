@@ -1,5 +1,5 @@
-import { BinaryExpression } from "./BinaryExpression";
-import { Expression } from "./Expression";
+import {BinaryExpression} from "./BinaryExpression";
+import {Expression} from "./Expression";
 
 export class Plus extends BinaryExpression {
 

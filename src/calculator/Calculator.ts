@@ -1,9 +1,9 @@
-import { Div } from "../expression/Div";
-import { Double } from "../expression/Double";
+import {Div} from "../expression/Div";
+import {Double} from "../expression/Double";
 import {Expression} from "../expression/Expression";
-import { Minus } from "../expression/Minus";
-import { Mul } from "../expression/Mul";
-import { Plus } from "../expression/Plus";
+import {Minus} from "../expression/Minus";
+import {Mul} from "../expression/Mul";
+import {Plus} from "../expression/Plus";
 
 function getTokens(exp: string) {
     return exp.split(/(?<=[-+*/()])|(?=[-+*/()])/);
@@ -21,7 +21,7 @@ export function calculate(exp: string): number | undefined {
     const queue: string[] = [];
     const stack: string[] = [];
 
-    // Shutting yard algorithm
+    // Shunting-yard algorithm
     tokens.forEach(token => {
         // check if number
         if(+token) {
@@ -45,9 +45,21 @@ export function calculate(exp: string): number | undefined {
                 stack.push(token);
                 break;
             case ')':
+                if(stack.length === 0) {
+                    // Invalid  parenthesis order in expression
+                    throw `Invalid expression, Shunting-yard algorithm could not parse the expression ${exp}.\n` +
+                    'More information: https://en.wikipedia.org/wiki/Shunting_yard_algorithm'
+                }
+
                 while(stack.at(stack.length-1) !== '(') {
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     queue.push(stack.pop()!);
+
+                    if(stack.length === 0) {
+                        // Invalid  parenthesis order in expression
+                        throw `Invalid expression, Shunting-yard algorithm could not parse the expression ${exp}.\n` +
+                        'More information: https://en.wikipedia.org/wiki/Shunting_yard_algorithm'
+                    }
                 }
                 stack.pop();
                 break;
@@ -66,11 +78,15 @@ export function calculate(exp: string): number | undefined {
             return;
         }
 
+        if(expressions.length < 2) {
+            throw `Invalid expression, Shunting-yard algorithm could not parse the expression ${exp}.\n` +
+            'More information: https://en.wikipedia.org/wiki/Shunting_yard_algorithm'
+        }
+
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const right = expressions.pop()!;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const left = expressions.pop()!;
-
         switch(token) {
             case '/':
                 expressions.push(new Div(left, right));
@@ -84,11 +100,14 @@ export function calculate(exp: string): number | undefined {
             case '-':
                 expressions.push(new Minus(left, right));
                 break;
+            default:
+                throw `Invalid token in expression ${token}`;
         }
     });
 
     if(expressions.length !== 1) {
-        throw `Invalid expression, shutting yard could not parse the expression ${exp}. Expression stack size is ${expressions.length}`
+        throw `Invalid expression, Shunting-yard algorithm could not parse the expression ${exp}.\n` +
+        'More information: https://en.wikipedia.org/wiki/Shunting_yard_algorithm'
     }
     
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

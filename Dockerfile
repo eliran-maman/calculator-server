@@ -2,7 +2,7 @@ FROM node:18-alpine
 
 RUN npm install -g pnpm
 
-WORKDIR /code
+WORKDIR /
 
 COPY . .
 

@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { calculate } from './calculator/Calculator';
+import {calculate} from './calculator/Calculator';
 
 const server = express.default();
 

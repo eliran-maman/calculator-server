@@ -1,4 +1,4 @@
-import { Expression } from "./Expression";
+import {Expression} from "./Expression";
 
 export abstract class BinaryExpression implements Expression {
     protected _left: Expression;
