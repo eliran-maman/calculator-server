@@ -28,4 +28,12 @@ describe('Test Calculator', () => {
     test('(5+5/(2*2-3)-1', () => {
         expect(() => calculate('abc')).toThrowError();
     });
+
+    test('()', () => {
+        expect(() => calculate('()')).toThrowError();
+    });
+
+    test('', () => {
+        expect(() => calculate('')).toThrowError();
+    });
 });
