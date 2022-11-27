@@ -11,7 +11,7 @@ function getTokens(exp: string) {
 }
 
 export function calculate(exp: string): number | undefined {
-    // Validate expressio
+    // Validate expression
     const validCharacters = exp.match(/^[0-9+/.()*-]+$/);
     if(!validCharacters) {
         throw `Expression [${exp}] contains invalid characters`;
