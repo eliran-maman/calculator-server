@@ -1,4 +1,4 @@
-import {calculate} from '../src/calculator/Calculator'
+import {calculate} from '../src/calculator/calculate'
 
 describe('Test Calculator', () => {
     test('5+5*4', () => {

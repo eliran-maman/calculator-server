@@ -4,6 +4,7 @@ import {Expression} from "../expression/Expression";
 import {Minus} from "../expression/Minus";
 import {Mul} from "../expression/Mul";
 import {Plus} from "../expression/Plus";
+import {isNumber} from "./isNumber";
 
 function getTokens(exp: string) {
     return exp.split(/(?<=[-+*/()])|(?=[-+*/()])/);
@@ -24,7 +25,7 @@ export function calculate(exp: string): number | undefined {
     // Shunting-yard algorithm
     tokens.forEach(token => {
         // check if number
-        if(+token) {
+        if(isNumber(token)) {
             // Is number
             queue.push(token);
             return;
@@ -73,7 +74,7 @@ export function calculate(exp: string): number | undefined {
 
     // Queue is now contains postfix form
     queue.forEach(token => {
-        if(+token) {
+        if(isNumber(token)) {
             expressions.push(new Double(+token));
             return;
         }
