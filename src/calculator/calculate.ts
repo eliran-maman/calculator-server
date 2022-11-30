@@ -10,7 +10,7 @@ function getTokens(exp: string) {
     return exp.split(/(?<=[-+*/()])|(?=[-+*/()])/);
 }
 
-export function calculate(exp: string): number | undefined {
+export function calculate(exp: string): number {
     // Validate expression
     const validCharacters = exp.match(/^[0-9+/.()*-]+$/);
     if(!validCharacters) {

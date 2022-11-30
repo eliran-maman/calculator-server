@@ -16,11 +16,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with: 
-          fetch-depth: 0
 
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@v0.0.44
+        uses: sprkl-dev/sprkl-action/setup@master
         with:
           token: ${{ secrets.USE_SPRKL_CI_TOKEN }}
           setenv: false
@@ -35,6 +33,6 @@ jobs:
         run: pnpm build
         
       - name: Run tests
-        run: pnpm test
+        run: pnpm test:sprkl
         env: 
           SPRKL_RECIPE: all
